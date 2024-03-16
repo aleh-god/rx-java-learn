@@ -1,10 +1,11 @@
 fun main(args: Array<String>) {
     println("Start main")
 
-    val runner = Runner()
+//    val rxRunner = RxRunner()
+//    rxRunner.runCompletableAndCompletable()
 
-    runner.runCompletableAndCompletable()
-//    runner.runCoroutines()
+    val coroutineRunner = CoroutineRunner()
+    coroutineRunner.runCoroutines()
 
     println("Stop main")
 }
