@@ -2,7 +2,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import rxjava.*
 
-class Runner {
+class RxRunner {
 
     fun runCompletableAndThenSingle() {
         val completableAndThenSingle = CompletableAndThenSingle()
