@@ -77,6 +77,26 @@ class CoroutineException {
         println("stop runBlocking")
     }
 
+    fun scopeHandleAwaitException() = runBlocking {
+        println("start runBlocking")
+
+        val result = try {
+            coroutineScope {
+                val taskAlfa = async { loadDataAsync() }
+                val taskBeta = async { loadDataAsync() }
+                return@coroutineScope taskAlfa.await() + taskBeta.await()
+            }
+        } catch (e: Throwable) {
+            println("catch: ${e.message}")
+            e.message ?: "null"
+        } finally {
+            println("finally")
+        }
+        println("Result: $result")
+
+        println("stop runBlocking")
+    }
+
     fun superHandleAwaitException() = runBlocking {
         println("start runBlocking")
 
