@@ -184,6 +184,29 @@ class CoroutineException {
         println("stop runBlocking")
     }
 
+    fun handleCancelExceptionInWithContext() = runBlocking {
+        println("start runBlocking")
+
+        val job = launch {
+            try {
+                println("try")
+                withContext(Dispatchers.IO) {
+                    loadDataAsync()
+                }
+            } catch (e: Throwable) {
+                println("catch: ${e.message}")
+            } finally {
+                println("finally")
+            }
+        }
+
+        delay(300)
+        println("job.cancel()")
+        job.cancel()
+
+        println("stop runBlocking")
+    }
+
     // TODO("DON'T DO IT")
 //    fun handleAwaitException() = runBlocking {
 //        println("start runBlocking")

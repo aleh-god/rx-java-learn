@@ -17,15 +17,13 @@ class SuspendCoroutine {
         println("stop runBlocking")
     }
 
-    private suspend fun sleep() {
-        suspendCoroutine<Unit> { continuation ->
-            println("start continuation in ${Thread.currentThread()}")
-            thread {
-                println("start sleep in ${Thread.currentThread()}")
-                Thread.sleep(1000)
-                println("end sleep in ${Thread.currentThread()}")
-                continuation.resume(Unit)
-            }
+    private suspend fun sleep() = suspendCoroutine<Unit> { continuation ->
+        println("start continuation in ${Thread.currentThread()}")
+        thread {
+            println("start sleep in ${Thread.currentThread()}")
+            Thread.sleep(1000)
+            println("end sleep in ${Thread.currentThread()}")
+            continuation.resume(Unit)
         }
     }
 }
